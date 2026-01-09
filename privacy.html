@@ -3,16 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy – Taski</title>
+  <title>Privacy Policy • Taski</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #f9fafb;
-      --card: #ffffff;
-      --text: #1f2937;
-      --muted: #6b7280;
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
       --accent: #6366f1;
-      --border: #e5e7eb;
+      --border: #1f2933;
     }
 
     * {
@@ -21,73 +24,60 @@
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(180deg, #020617, #0f172a);
       color: var(--text);
       line-height: 1.6;
     }
 
-    header {
-      padding: 2.5rem 1.5rem;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.25rem;
-    }
-
-    header p {
-      margin-top: 0.5rem;
-      color: var(--muted);
-    }
-
-    main {
+    .container {
       max-width: 900px;
-      margin: 0 auto 4rem;
-      padding: 0 1.5rem;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    header {
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
     }
 
     .card {
-      background: var(--card);
+      background: rgba(17, 24, 39, 0.85);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 2rem;
-    }
-
-    section {
-      margin-bottom: 2rem;
-    }
-
-    section:last-child {
-      margin-bottom: 0;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
     }
 
     h2 {
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-      color: var(--accent);
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+      color: #f9fafb;
     }
 
     p {
-      margin: 0.5rem 0;
+      color: var(--text);
+      margin-bottom: 12px;
     }
 
     ul {
-      padding-left: 1.25rem;
-      margin: 0.5rem 0;
+      padding-left: 20px;
+      margin-bottom: 12px;
     }
 
     li {
-      margin: 0.4rem 0;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      color: var(--muted);
-      font-size: 0.9rem;
+      margin-bottom: 6px;
+      color: var(--text);
     }
 
     a {
@@ -98,120 +88,121 @@
     a:hover {
       text-decoration: underline;
     }
+
+    footer {
+      margin-top: 48px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
   </style>
 </head>
 
 <body>
-  <header>
-    <h1>Privacy Policy</h1>
-    <p>Last updated: <strong>September 2026</strong></p>
-  </header>
+  <div class="container">
+    <header>
+      <h1>Privacy Policy</h1>
+      <div class="subtitle">Taski • Last updated: January 2026</div>
+    </header>
 
-  <main>
-    <div class="card">
-      <section>
-        <h2>1. Introduction</h2>
-        <p>
-          Taski (“we”, “our”, or “us”) is a productivity and organization app
-          designed to help users manage tasks, notes, and classes. We respect
-          your privacy and are committed to protecting your personal
-          information.
-        </p>
-      </section>
+    <section class="card">
+      <h2>1. Introduction</h2>
+      <p>
+        Taski ("we", "our", or "us") respects your privacy. This Privacy Policy explains
+        how we collect, use, and protect your information when you use the Taski application.
+      </p>
+    </section>
 
-      <section>
-        <h2>2. Information We Collect</h2>
+    <section class="card">
+      <h2>2. Information We Collect</h2>
+      <p>We collect only the information necessary to provide Taski’s features.</p>
+      <ul>
+        <li>Basic account information (such as name and email address)</li>
+        <li>Authentication data from Google OAuth</li>
+        <li>Task, class, or productivity-related data you create within the app</li>
+      </ul>
+    </section>
 
-        <p><strong>a. Information You Provide</strong></p>
-        <ul>
-          <li>Tasks, notes, and class names you create</li>
-          <li>Optional titles or descriptions you enter</li>
-          <li>Google account access only if you choose to connect Google services</li>
-        </ul>
+    <section class="card">
+      <h2>3. Google OAuth & API Usage</h2>
+      <p>
+        Taski uses Google APIs to authenticate users and optionally connect to services
+        such as Google Classroom or Google Drive.
+      </p>
+      <ul>
+        <li>We only request the minimum permissions required for functionality</li>
+        <li>Google user data is not sold, shared, or used for advertising</li>
+        <li>Access to Google data is limited to the features you explicitly enable</li>
+      </ul>
+      <p>
+        Taski’s use of Google user data complies with the
+        <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank">
+          Google API Services User Data Policy
+        </a>.
+      </p>
+    </section>
 
-        <p><strong>b. Information from Google (Optional)</strong></p>
-        <ul>
-          <li>File names and contents of documents you choose to import</li>
-        </ul>
+    <section class="card">
+      <h2>4. How We Use Your Information</h2>
+      <ul>
+        <li>To provide and maintain Taski’s features</li>
+        <li>To authenticate users securely</li>
+        <li>To improve performance and reliability</li>
+        <li>To respond to support requests</li>
+      </ul>
+    </section>
 
-        <p>
-          We do <strong>not</strong> access files without your permission.
-        </p>
-      </section>
+    <section class="card">
+      <h2>5. Data Storage & Security</h2>
+      <p>
+        We take reasonable measures to protect your information. Data is stored securely
+        and access is restricted to authorized systems only.
+      </p>
+      <p>
+        You may request deletion of your account and associated data at any time.
+      </p>
+    </section>
 
-      <section>
-        <h2>3. How We Use Your Information</h2>
-        <ul>
-          <li>Display your tasks, notes, and classes</li>
-          <li>Sync content you explicitly import</li>
-          <li>Improve app functionality and reliability</li>
-        </ul>
-        <p>We do <strong>not</strong> sell your data.</p>
-      </section>
+    <section class="card">
+      <h2>6. Third-Party Services</h2>
+      <p>
+        Taski may rely on trusted third-party services (such as Google Firebase or Google APIs)
+        solely to operate the app. These services are bound by their own privacy policies.
+      </p>
+    </section>
 
-      <section>
-        <h2>4. Data Storage</h2>
-        <p>
-          Your data is stored securely and is only accessible to you. Data is
-          not shared with other users.
-        </p>
-      </section>
+    <section class="card">
+      <h2>7. Your Rights</h2>
+      <ul>
+        <li>Access your personal data</li>
+        <li>Request correction or deletion</li>
+        <li>Revoke Google OAuth permissions at any time</li>
+      </ul>
+    </section>
 
-      <section>
-        <h2>5. Sharing of Information</h2>
-        <p>
-          We do not share your personal data with third parties except when
-          required by law or when necessary to provide a feature you requested
-          (such as Google Drive import).
-        </p>
-      </section>
+    <section class="card">
+      <h2>8. Changes to This Policy</h2>
+      <p>
+        We may update this Privacy Policy as Taski evolves. Changes will be posted on this page.
+      </p>
+    </section>
 
-      <section>
-        <h2>6. Children’s Privacy</h2>
-        <p>
-          Taski may be used by students, including minors. We do not knowingly
-          collect sensitive personal information, show ads, or sell user data.
-        </p>
-      </section>
+    <section class="card">
+      <h2>9. Contact</h2>
+      <p>
+        If you have questions about this Privacy Policy, contact us at:
+      </p>
+      <p>
+        📧 <strong>support@taski.app</strong>
+        <br />
+        (replace with your real support email)
+      </p>
+    </section>
 
-      <section>
-        <h2>7. Data Deletion</h2>
-        <p>
-          You may delete your data at any time by deleting content inside the
-          app or requesting account deletion.
-        </p>
-      </section>
-
-      <section>
-        <h2>8. Security</h2>
-        <p>
-          We take reasonable measures to protect your data, but no system is
-          completely secure.
-        </p>
-      </section>
-
-      <section>
-        <h2>9. Changes to This Policy</h2>
-        <p>
-          We may update this Privacy Policy from time to time. Changes will be
-          posted here with an updated date.
-        </p>
-      </section>
-
-      <section>
-        <h2>10. Contact</h2>
-        <p>
-          If you have questions about this Privacy Policy, contact us at:
-        </p>
-        <p>
-          📧 <strong>Email:</strong> your-email@example.com
-        </p>
-      </section>
-    </div>
-  </main>
-
-  <footer>
-    © 2026 Taski. All rights reserved.
-  </footer>
+    <footer>
+      © 2026 Taski. All rights reserved.
+    </footer>
+  </div>
 </body>
 </html>
+
