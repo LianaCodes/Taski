@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome — Taski Setup</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="firebase-config.js"></script>
+</head>
+<body class="bg-setup">
+  <main class="center-page">
+    <div class="glass-card setup-card">
+      <div class="logo"><img src="logo.svg" alt="Taski logo" class="logo-img-small"></div>
+      <div class="progress">
+        <div class="progress-bar" style="width:33%"></div>
+      </div>
+  <h1 class="card-title">Welcome to Taski</h1>
+      <p class="card-sub">Let's get you set up in just a few quick steps.</p>
+
+      <form id="setup-form" class="card-form">
+        <input type="text" id="full-name" placeholder="Your name" required>
+        <input type="text" id="grade" placeholder="Grade / Year" required>
+
+        <label class="muted">What is your main goal?</label>
+        <div class="goals" id="goals">
+          <button type="button" class="goal">🎯 Improve my grades</button>
+          <button type="button" class="goal">🗂️ Stay organized</button>
+          <button type="button" class="goal">📚 Prepare for exams</button>
+          <button type="button" class="goal">⚖️ Balance school & life</button>
+        </div>
+
+        <div class="setup-actions">
+          <button id="back-btn" type="button" class="btn btn-ghost">Back</button>
+          <button id="continue-btn" type="button" class="btn btn-gradient" disabled>Continue</button>
+        </div>
+
+        <a href="dashboard.html" id="skip-setup" class="muted">Skip setup</a>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const API_URL = 'http://localhost:5000/api';
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      const nameInput = document.getElementById('full-name');
+      const gradeInput = document.getElementById('grade');
+      const goals = document.getElementById('goals');
+      const continueBtn = document.getElementById('continue-btn');
+      let selectedGoal = null;
+
+      function updateState() {
+        if (nameInput.value.trim() && gradeInput.value.trim() && selectedGoal) {
+          continueBtn.disabled = false;
+        } else {
+          continueBtn.disabled = true;
+        }
+      }
+
+      nameInput.addEventListener('input', updateState);
+      gradeInput.addEventListener('input', updateState);
+
+      goals.addEventListener('click', (e) => {
+        if (e.target.classList.contains('goal')) {
+          Array.from(goals.querySelectorAll('.goal')).forEach(b => b.classList.remove('active'));
+          e.target.classList.add('active');
+          selectedGoal = e.target.textContent.trim();
+          updateState();
+        }
+      });
+
+      continueBtn.addEventListener('click', async () => {
+        const userId = localStorage.getItem('userId');
+        const userName = nameInput.value.trim();
+        const userGrade = gradeInput.value.trim();
+        
+        try {
+          await fetch(`${API_URL}/user/setup`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId, userName, userGrade, goal: selectedGoal })
+          });
+        } catch (err) {
+          console.error('Setup save error:', err);
+        }
+
+        localStorage.setItem('userName', userName);
+        localStorage.setItem('userGrade', userGrade);
+        localStorage.setItem('userGoal', selectedGoal || '');
+        localStorage.setItem('setupCompleted', 'true');
+        localStorage.removeItem('isNewUser');
+        
+        window.location.href = 'dashboard.html';
+      });
+    });
+  </script>
+</body>
+</html>

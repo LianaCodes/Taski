@@ -1,0 +1,36 @@
+Create 4 n8n workflows for a student task management app called Taski:
+
+**Workflow 1: Task Due Tomorrow Reminder**
+- Trigger: Daily at 6 PM
+- Action: GET request to http://localhost:5000/api/tasks/due-tomorrow
+- Email: Send friendly reminder if tasks exist
+- Subject: "📋 Task Due Tomorrow!"
+- Body: "Hey there! 👋 Just a friendly reminder that your task '[TASK_NAME]' is due tomorrow. You've got this! 💪 Best, The Taski Team"
+
+**Workflow 2: Exam 1 Week Warning**  
+- Trigger: Daily at 9 AM
+- Action: GET request to http://localhost:5000/api/exams-upcoming/7
+- Email: Send heads up about exam in 7 days
+- Subject: "📚 Exam in One Week!"
+- Body: "Hi! 😊 Your exam '[EXAM_NAME]' is coming up in one week ([DATE]). Time to start preparing! You can do this! 🌟 Happy studying, The Taski Team"
+
+**Workflow 3: Exam 3 Days Alert**
+- Trigger: Daily at 9 AM  
+- Action: GET request to http://localhost:5000/api/exams-upcoming/3
+- Email: Send focus reminder for exam in 3 days
+- Subject: "⏰ Exam in 3 Days!"
+- Body: "Hello! 📖 Your exam '[EXAM_NAME]' is this [DAY] ([DATE]). Final push time! Review those notes! 🚀 You're almost there, The Taski Team"
+
+**Workflow 4: Exam Tomorrow Night**
+- Trigger: Daily at 8 PM
+- Action: GET request to http://localhost:5000/api/exams-upcoming/1  
+- Email: Send calming reminder night before exam
+- Subject: "🌙 Exam Tomorrow - You're Ready!"
+- Body: "Hey champion! ✨ Your exam '[EXAM_NAME]' is tomorrow. Get a good night's sleep - you've prepared well! 😴💤 Believe in yourself, The Taski Team"
+
+Each workflow should:
+- Check if API returns data before sending email
+- Use Gmail/SMTP for email delivery
+- Include user's email from API response
+- Only send if tasks/exams exist for that timeframe
+- Be friendly, encouraging, and supportive in tone

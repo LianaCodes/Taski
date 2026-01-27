@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taski - Cozy Study Planner</title>
+  <meta name="description" content="Taski — a calm study planner to organize classes, tasks, exams and focused study sessions with Pomodoro-style timers.">
+  <meta name="keywords" content="study planner, tasks, classes, exams, pomodoro, notes, calendar, google classroom">
+  <meta name="author" content="Taski">
+  <meta property="og:title" content="Taski — Cozy Study Planner">
+  <meta property="og:description" content="Organize classes, manage tasks, and focus with built-in study sessions. Coming soon: Google Classroom import.">
+  <meta property="og:image" content="/logo.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="landing-bg">
+  <header class="landing-header">
+      <div class="brand">
+        <a href="index.html" class="logo-link"><img src="logo.svg" alt="Taski logo" class="logo-img"></a>
+      </div>
+    </header>
+
+    <nav class="landing-nav">
+      <a href="login.html" class="btn btn-primary">Log in</a>
+      <a href="signup.html" class="btn btn-primary">Sign up</a>
+    </nav>
+
+    <main class="container hero" style="margin-top: 80px;">
+      <div class="hero-left">
+  <div class="eyebrow">Introducing Taski • Study planner for students</div>
+        <h1 class="hero-title">Organize classes, tasks, and exams in one calm space</h1>
+  <p class="hero-sub">Taski helps you manage coursework, track deadlines, and build focused study habits with a clean, distraction-free interface.</p>
+
+        <div class="cta-row">
+          <a href="signup.html" class="btn btn-primary btn-large">Get started — it's free!</a>
+          <a href="login.html" class="btn btn-ghost">I already have an account</a>
+        </div>
+
+        <div class="chips">
+          <span class="chip">Classes</span>
+          <span class="chip">Tasks</span>
+          <span class="chip">Exams</span>
+          <span class="chip">Study Sessions</span>
+          <span class="chip">Notes</span>
+        </div>
+
+        <div class="trust">Free forever • No credit card</div>
+        
+        <div class="feature-card google-classroom" style="max-width: 500px; padding: 1.5rem; margin: 2rem 0; background: rgba(99, 102, 241, 0.05);">
+          <h3 style="color: var(--accent-color);">Google Classroom</h3>
+          <p>Planned integration to import classes and assignments from Google Classroom (opt-in).</p>
+        </div>
+      </div>
+
+      <aside class="hero-right">
+        <div class="screenshot-frame">
+          <div class="mini-dashboard">
+            <div class="mini-sidebar">
+              <button class="close-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.2); border: none; color: white; font-size: 14px; padding: 2px 6px; border-radius: 4px;">×</button>
+              <div class="mini-logo">T</div>
+              <div class="mini-nav">
+                <div class="mini-nav-item">📊</div>
+                <div class="mini-nav-item">✅</div>
+                <div class="mini-nav-item">📚</div>
+                <div class="mini-nav-item">📝</div>
+                <div class="mini-nav-item active">🤖</div>
+                <div class="mini-nav-item">⚙️</div>
+              </div>
+            </div>
+            <div class="mini-main">
+              <div class="mini-topbar">
+                <div class="mini-greeting">Good morning, Alex!</div>
+                <div class="mini-user">🌸</div>
+              </div>
+              <div class="mini-stats">
+                <div class="mini-stat-card" style="background: linear-gradient(135deg, #ec4899, #f472b6);">
+                  <div class="mini-stat-icon">✅</div>
+                  <div class="mini-stat-text">12</div>
+                </div>
+                <div class="mini-stat-card" style="background: linear-gradient(135deg, #3b82f6, #60a5fa);">
+                  <div class="mini-stat-icon">🎯</div>
+                  <div class="mini-stat-text">8</div>
+                </div>
+                <div class="mini-stat-card" style="background: linear-gradient(135deg, #10b981, #34d399);">
+                  <div class="mini-stat-icon">⏱️</div>
+                  <div class="mini-stat-text">4</div>
+                </div>
+                <div class="mini-stat-card" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">
+                  <div class="mini-stat-icon">📚</div>
+                  <div class="mini-stat-text">5</div>
+                </div>
+              </div>
+              <div class="mini-content">
+                <div class="mini-ai-section">
+                  <div class="mini-chat-header">
+                    <h4>Taski AI</h4>
+                    <span>+ New Chat</span>
+                  </div>
+                  <div class="mini-chat-messages">
+                    <div class="mini-message ai">
+                      <span class="mini-avatar">📚</span>
+                      <span>Hi! I'm your Taski study tutor...</span>
+                    </div>
+                    <div class="mini-message user">
+                      <span class="mini-avatar">👤</span>
+                      <span>Help me study for my math exam</span>
+                    </div>
+                    <div class="mini-message ai">
+                      <span class="mini-avatar">📚</span>
+                      <span>Great! Let's create a study plan...</span>
+                    </div>
+                  </div>
+                  <div class="mini-chat-input">
+                    <input placeholder="Ask me anything..." />
+                    <button>Send</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="screenshot-caption">Your personalized study dashboard</div>
+      </aside>
+    </main>
+
+    <section class="container explore">
+      <h2 class="section-title">What you can do</h2>
+      <div class="explore-grid">
+        <article class="explore-card">
+          <h3>Classes</h3>
+          <p>Create and organize courses, link assignments and exams, and attach notes to classes.</p>
+        </article>
+        <article class="explore-card">
+          <h3>Tasks</h3>
+          <p>Quickly add tasks, set due dates and priorities, and organize work by class.</p>
+        </article>
+        <article class="explore-card">
+          <h3>Notes</h3>
+          <p>Write notes within app or import from google docs and link notes to classes or Exams!</p>
+        </article>
+        <article class="explore-card">
+          <h3>Calendar</h3>
+          <p>See tasksand exams on a calendar view to plan your semester.</p>
+        </article>
+        <article class="explore-card">
+          <h3>Exams</h3>
+          <p>Schedule exams, create study plans, and track progress toward your goals.</p>
+        </article>
+        <article class="explore-card">
+          <h3>Study Sessions</h3>
+          <p>Track focused study time with Pomodoro-style timers to stay productive and build better study habits.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="container explore">
+      <h2 class="section-title">Taski AI</h2>
+      <div class="explore-grid" style="grid-template-columns: 1fr; max-width: 800px; margin: 0 auto;">
+        <article class="explore-card" style="text-align: center; padding: 3rem 2rem;">
+          <h3 style="margin-bottom: 1.5rem;">🤖 AI Tutor & Study Companion</h3>
+          <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">
+            Taski AI is your intelligent study tutor and companion that understands your schedule and helps you succeed academically.
+          </p>
+          <p style="margin-bottom: 2rem;">
+            As both a tutor and study assistant, it explains concepts step by step, plans personalized study sessions, breaks down exams, and keeps you on track with guidance tailored to your tasks, classes, and deadlines.
+          </p>
+          <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+            <span class="chip">Personalized Study Plans</span>
+            <span class="chip">Concept Explanations</span>
+            <span class="chip">Exam Preparation</span>
+            <span class="chip">Motivation Support</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="container footer">
+      <div>© Taski — made for calm focus</div>
+      <div><a href="about.html">About</a> · <a href="login.html">Log in</a> · <a href="signup.html">Sign up</a></div>
+    </footer>
+  </body>
+  </html>

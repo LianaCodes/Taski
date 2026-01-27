@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Email - Taski</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-login">
+  <main class="center-page">
+    <div id="notification" class="notification"></div>
+    <div class="glass-card login-card">
+      <div class="logo"><img src="logo.svg" alt="Taski logo" class="logo-img-small"></div>
+      <h1 class="card-title">Check Your Email</h1>
+      <p class="card-sub">We've sent a verification link to your email address</p>
+      
+      <div style="margin: 2rem 0; text-align: center;">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">📧</div>
+        <p>Please check your inbox and click the verification link.</p>
+        <p class="muted" style="margin-top: 0.5rem;">Don't forget to check your spam folder!</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <button id="resend-btn" class="btn btn-secondary">Resend Verification Email</button>
+        <a href="login.html" class="btn btn-gradient">Back to Login</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/9.20.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.20.0/firebase-auth-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script>
+    function showNotification(message, type = 'info') {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.className = `notification ${type}`;
+      notification.classList.add('show');
+
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 4000);
+    }
+
+    // Initialize Firebase
+    if (window.firebaseConfig && !firebase.apps.length) {
+      firebase.initializeApp(window.firebaseConfig);
+    }
+    const auth = firebase.auth();
+
+    document.getElementById('resend-btn').addEventListener('click', async () => {
+      const user = auth.currentUser;
+      
+      if (user) {
+        try {
+          await user.sendEmailVerification();
+          showNotification('Verification email sent! Check your inbox.', 'success');
+        } catch (error) {
+          if (error.code === 'auth/too-many-requests') {
+            showNotification('Too many requests. Please wait a few minutes.', 'error');
+          } else {
+            showNotification('Failed to send email. Please try again.', 'error');
+          }
+        }
+      } else {
+        showNotification('Please log in first to resend verification email.', 'error');
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 2000);
+      }
+    });
+  </script>
+</body>
+</html>

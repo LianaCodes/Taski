@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Classroom Auth</title>
+</head>
+<body>
+  <h2>Connecting to Google Classroom...</h2>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    
+    if (code) {
+      // Store the code and close popup
+      window.opener.localStorage.setItem('google_auth_code', code);
+      window.close();
+    } else {
+      document.body.innerHTML = '<h2>Authentication failed. Please try again.</h2>';
+    }
+  </script>
+</body>
+</html>

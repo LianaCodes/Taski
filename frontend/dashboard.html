@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Taski</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script src="firebase-config.js"></script>
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar" id="main-sidebar">
+      <div class="sidebar-header">
+        <button id="sidebar-toggle-btn" class="sidebar-toggle-btn" title="Toggle sidebar">
+          <span class="hamburger-icon">☰</span>
+        </button>
+        <div class="logo">
+          <img src="logo.svg" alt="Taski" class="logo-img-sidebar">
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" data-section="dashboard" class="nav-item active">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" data-section="tasks" class="nav-item">
+          <span class="nav-icon">✅</span>
+          <span>Tasks</span>
+        </a>
+        <a href="#" data-section="classes" class="nav-item">
+          <span class="nav-icon">📚</span>
+          <span>Classes</span>
+        </a>
+        <a href="#" data-section="exams" class="nav-item">
+          <span class="nav-icon">📝</span>
+          <span>Exams</span>
+        </a>
+        <a href="#" data-section="sessions" class="nav-item">
+          <span class="nav-icon">⏱️</span>
+          <span>Study Sessions</span>
+        </a>
+        <a href="#" data-section="notes" class="nav-item">
+          <span class="nav-icon">📝</span>
+          <span>Notes</span>
+        </a>
+        <a href="#" data-section="calendar" class="nav-item">
+          <span class="nav-icon">📅</span>
+          <span>Calendar</span>
+        </a>
+        <a href="#" data-section="stats" class="nav-item">
+          <span class="nav-icon">📈</span>
+          <span>Analytics</span>
+        </a>
+        <a href="#" data-section="settings" class="nav-item">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="top-bar" id="dashboard-top-bar">
+        <div class="greeting-section" id="greeting-section">
+          <h1 id="greeting">Welcome back!</h1>
+          <p class="greeting-sub" id="greeting-time">Let's make today productive</p>
+        </div>
+        <div class="top-actions">
+          <div class="user-menu">
+            <div class="user-avatar" id="user-avatar">🌸</div>
+          </div>
+          <button id="theme-btn" class="theme-toggle">🌙</button>
+        </div>
+      </div>
+
+      <div class="top-bar-simple" id="other-top-bar" style="display: none;">
+        <div class="top-actions">
+          <div class="user-menu">
+            <div class="user-avatar">🌸</div>
+          </div>
+          <button id="theme-btn" class="theme-toggle">🌙</button>
+        </div>
+      </div>
+
+      <!-- Dashboard Section -->
+      <section id="dashboard" class="section active">
+        <div class="dashboard-grid">
+          <div class="quick-stats">
+            <div class="stat-card glass">
+              <div class="stat-icon">✅</div>
+              <div class="stat-info">
+                <h3 id="total-tasks">0</h3>
+                <p>Total Tasks</p>
+              </div>
+            </div>
+            <div class="stat-card glass">
+              <div class="stat-icon">🎯</div>
+              <div class="stat-info">
+                <h3 id="completed-tasks">0</h3>
+                <p>Completed</p>
+              </div>
+            </div>
+            <div class="stat-card glass">
+              <div class="stat-icon">⏳</div>
+              <div class="stat-info">
+                <h3 id="pending-tasks">0</h3>
+                <p>Pending</p>
+              </div>
+            </div>
+            <div class="stat-card glass">
+              <div class="stat-icon">📚</div>
+              <div class="stat-info">
+                <h3 id="total-classes">0</h3>
+                <p>Classes</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="recent-activity glass">
+            <h3>Recent Activity</h3>
+            <div id="recent-list"></div>
+          </div>
+          
+          <div class="upcoming-events glass">
+            <h3>Upcoming Events</h3>
+            <div id="upcoming-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tasks Section -->
+      <section id="tasks" class="section">
+        <div class="section-header">
+          <h2>Tasks</h2>
+          <button id="add-task-modal-btn" class="btn-primary">+ Add Task</button>
+        </div>
+        
+        <div id="tasks-list" class="tasks-grid"></div>
+      </section>
+
+      <!-- Classes Section -->
+      <section id="classes" class="section">
+        <div class="section-header">
+          <h2>Classes</h2>
+          <button id="add-class-modal-btn" class="btn-primary">+ Add Class</button>
+        </div>
+        
+        <div id="classes-list" class="classes-grid"></div>
+      </section>
+
+      <!-- Exams Section -->
+      <section id="exams" class="section">
+        <div class="section-header">
+          <h2>Exams</h2>
+          <button id="add-exam-modal-btn" class="btn-primary">+ Add Exam</button>
+        </div>
+        
+        <div id="exams-list" class="exams-grid"></div>
+        
+        <!-- Study Topics Section -->
+        <div id="study-topics-section" class="study-topics-section glass" style="display: none;">
+          <div class="section-header" onclick="toggleStudyTopics()" style="cursor: pointer;">
+            <h3>📚 Study Topics <span id="topics-toggle">▼</span></h3>
+            <div class="exam-info">
+              <span id="current-exam-name"></span>
+              <span id="current-exam-date"></span>
+            </div>
+          </div>
+          
+          <div id="topics-content" class="topics-content">
+            <div class="topics-input">
+              <input type="text" id="new-topic-input" placeholder="Add study topic">
+              <button id="add-topic-btn" class="btn-primary">+ Add Topic</button>
+            </div>
+            
+            <div id="study-topics-list" class="topics-list"></div>
+            
+            <div class="topics-progress">
+              <div class="progress-bar-container">
+                <div class="progress-bar" id="topics-progress-bar"></div>
+              </div>
+              <span id="topics-progress-text">0% Complete</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Study Sessions Section -->
+      <section id="sessions" class="section">
+        <div class="section-header">
+          <h2>Study Sessions</h2>
+        </div>
+        
+        <div class="sessions-layout">
+          <div class="timer-section glass">
+            <h3>🍅 Pomodoro Timer</h3>
+            <div class="timer-display">
+              <div class="timer-simple">
+                <span id="timer-text">25:00</span>
+              </div>
+            </div>
+            <div class="timer-controls">
+              <button id="start-timer" class="btn-primary">▶️ Start</button>
+              <button id="pause-timer" class="btn-secondary">⏸️ Pause</button>
+              <button id="reset-timer" class="btn-secondary">🔄 Reset</button>
+            </div>
+            <div class="timer-settings">
+              <label>Work: <input type="number" id="work-minutes" value="25" min="1" max="60"> min</label>
+              <label>Break: <input type="number" id="break-minutes" value="5" min="1" max="30"> min</label>
+            </div>
+            <div class="session-link">
+              <label>Link to:</label>
+              <select id="session-class">
+                <option value="">Select class (optional)</option>
+              </select>
+              <select id="session-exam">
+                <option value="">Select exam (optional)</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="sessions-history glass">
+            <h3>📊 Recent Sessions</h3>
+            <div id="sessions-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notes Section -->
+      <section id="notes" class="section">
+        <div class="section-header">
+          <h2>Notes</h2>
+          <div class="notes-header-actions">
+            <button id="create-doc-btn" class="btn-secondary">+ Create Google Doc</button>
+            <button id="import-gdocs-header-btn" class="btn-secondary">Import from Google Docs</button>
+            <button id="add-note-modal-btn" class="btn-primary">+ Add Note</button>
+          </div>
+        </div>
+        
+        <div id="notes-list" class="notes-grid"></div>
+        <div id="docs-list" class="docs-grid"></div>
+      </section>
+
+      <!-- Calendar Section -->
+      <section id="calendar" class="section">
+        <div class="section-header">
+          <h2>Calendar</h2>
+        </div>
+        
+        <div class="calendar-layout">
+          <div class="calendar-widget glass">
+            <div class="calendar-header">
+              <button id="prev-month">‹</button>
+              <h3 id="current-month">January 2024</h3>
+              <button id="next-month">›</button>
+            </div>
+            <div class="calendar-weekdays">
+              <div class="weekday">Sun</div>
+              <div class="weekday">Mon</div>
+              <div class="weekday">Tue</div>
+              <div class="weekday">Wed</div>
+              <div class="weekday">Thu</div>
+              <div class="weekday">Fri</div>
+              <div class="weekday">Sat</div>
+            </div>
+            <div class="calendar-days" id="calendar-grid"></div>
+          </div>
+          
+          <div class="calendar-events glass">
+            <h3>Legend</h3>
+            <div class="legend">
+              <div class="legend-item"><span class="legend-color exam"></span>Exams</div>
+              <div class="legend-item"><span class="legend-color task"></span>Tasks</div>
+              <div class="legend-item"><span class="legend-color session"></span>Sessions</div>
+            </div>
+            <div id="calendar-events-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Analytics Section -->
+      <section id="stats" class="section">
+        <div class="section-header">
+          <h2>Analytics</h2>
+        </div>
+        
+        <div class="analytics-grid">
+          <div class="chart-card glass">
+            <h3>Task Completion</h3>
+            <div class="pie-chart" id="task-pie-chart">
+              <div class="chart-info">
+                <div class="chart-stat">
+                  <span class="stat-number" id="completion-rate">0%</span>
+                  <span class="stat-label">Completion Rate</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="chart-card glass">
+            <h3>Study Time</h3>
+            <div class="line-chart" id="study-time-chart">
+              <div class="chart-info">
+                <div class="chart-stat">
+                  <span class="stat-number" id="total-study-time">0h</span>
+                  <span class="stat-label">Total Study Time</span>
+                </div>
+                <div class="chart-stat">
+                  <span class="stat-number" id="avg-session">0min</span>
+                  <span class="stat-label">Avg Session</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="chart-card glass">
+            <h3>Productivity Insights</h3>
+            <div class="insights-content">
+              <div class="insight-item">
+                <span class="insight-icon">📈</span>
+                <div class="insight-text">
+                  <strong id="most-productive-day">Monday</strong>
+                  <small>Most productive day</small>
+                </div>
+              </div>
+              <div class="insight-item">
+                <span class="insight-icon">🎯</span>
+                <div class="insight-text">
+                  <strong id="streak-count">0 days</strong>
+                  <small>Current streak</small>
+                </div>
+              </div>
+              <div class="insight-item">
+                <span class="insight-icon">⏱️</span>
+                <div class="insight-text">
+                  <strong id="best-focus-time">25min</strong>
+                  <small>Best focus time</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="stats-summary glass">
+            <h3>Summary</h3>
+            <div class="summary-stats">
+              <div class="summary-item">
+                <span class="summary-number" id="stat-total-tasks">0</span>
+                <span class="summary-label">Total Tasks</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-number" id="stat-completed-tasks">0</span>
+                <span class="summary-label">Completed</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-number" id="stat-total-classes">0</span>
+                <span class="summary-label">Classes</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-number" id="stat-total-exams">0</span>
+                <span class="summary-label">Exams</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- Settings Section -->
+      <section id="settings" class="section">
+        <div class="section-header">
+          <h2>Settings</h2>
+        </div>
+        
+        <div class="settings-layout">
+          <div class="settings-card glass">
+            <h3>Appearance</h3>
+            <label>Theme
+              <select id="theme-select">
+                <option value="pink">Pastel Pink</option>
+                <option value="babyblue">Pastel Blue</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="settings-card glass">
+            <h3>Notifications</h3>
+            <label><input type="checkbox" id="email-reminders" checked> Email reminders for tasks</label>
+            <label><input type="checkbox" id="exam-alerts" checked> Exam alerts</label>
+          </div>
+
+          <div class="settings-card glass">
+            <h3>Account</h3>
+            <button class="btn-primary" id="change-password-btn">Change Password</button>
+            <button class="btn-danger" id="delete-account-btn">Delete Account</button>
+            <button class="btn-logout" id="logout-btn">Log Out</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modals -->
+  <div id="task-modal" class="modal">
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <h3>Add Task</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="task-form" class="modal-form">
+        <input type="text" id="task-name" placeholder="Task name" required>
+        <select id="task-class">
+          <option value="">Select class (optional)</option>
+        </select>
+        <select id="task-category">
+          <option value="personal">Personal</option>
+          <option value="school">School</option>
+          <option value="work">Work</option>
+        </select>
+        <select id="task-priority">
+          <option value="low">Low Priority</option>
+          <option value="medium" selected>Medium Priority</option>
+          <option value="high">High Priority</option>
+        </select>
+        <input type="date" id="task-due">
+        <textarea id="task-description" placeholder="Description (optional)"></textarea>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary modal-cancel">Cancel</button>
+          <button type="submit" class="btn-primary">Add Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="class-modal" class="modal">
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <h3>Add Class</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="class-form" class="modal-form">
+        <input type="text" id="class-name" placeholder="Class name" required>
+        <input type="text" id="class-subject" placeholder="Subject" required>
+        <input type="text" id="class-teacher" placeholder="Teacher (optional)">
+        <input type="color" id="class-color" value="#5352ed">
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary modal-cancel">Cancel</button>
+          <button type="submit" class="btn-primary">Add Class</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="exam-modal" class="modal">
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <h3>Add Exam</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="exam-form" class="modal-form">
+        <input type="text" id="exam-name" placeholder="Exam name" required>
+        <select id="exam-class">
+          <option value="">Select class</option>
+        </select>
+        <input type="date" id="exam-date" required>
+        <input type="time" id="exam-time">
+        <textarea id="exam-description" placeholder="Description (optional)"></textarea>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary modal-cancel">Cancel</button>
+          <button type="submit" class="btn-primary">Add Exam</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="note-modal" class="modal">
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <h3>Add Note</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="note-form" class="modal-form">
+        <input type="text" id="note-title" placeholder="Note title" required>
+        <select id="note-class">
+          <option value="">Select class (optional)</option>
+        </select>
+        <div class="note-editor">
+          <div class="editor-toolbar">
+            <button type="button" class="editor-btn" data-command="bold"><b>B</b></button>
+            <button type="button" class="editor-btn" data-command="italic"><i>I</i></button>
+            <button type="button" class="editor-btn" data-command="underline"><u>U</u></button>
+            <button type="button" class="editor-btn highlight-btn" data-color="#fef3c7">Highlight</button>
+            <button type="button" class="editor-btn highlight-btn" data-color="#fecaca">Red</button>
+            <button type="button" class="editor-btn highlight-btn" data-color="#bfdbfe">Blue</button>
+            <button type="button" class="editor-btn highlight-btn" data-color="#bbf7d0">Green</button>
+          </div>
+          <div id="note-content" class="note-editor-content" contenteditable="true" placeholder="Start writing your note..."></div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary modal-cancel">Cancel</button>
+          <button type="submit" class="btn-primary">Save Note</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="password-modal" class="modal">
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <h3>Change Password</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="password-form" class="modal-form">
+        <input type="password" id="modal-current-password" placeholder="Current password" required>
+        <div class="password-strength">
+          <input type="password" id="modal-new-password" placeholder="New password" required>
+          <div class="strength-meter">
+            <div class="strength-bar" id="strength-bar"></div>
+          </div>
+          <div class="strength-text" id="strength-text">Password strength</div>
+        </div>
+        <input type="password" id="modal-confirm-password" placeholder="Confirm new password" required>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary modal-cancel">Cancel</button>
+          <button type="submit" class="btn-primary">Update Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="gdocs-import-modal" class="modal">
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <h3>Import from Google Docs</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-form">
+        <div id="docs-loading" class="loading-state" style="display: none;">
+          <div class="spinner"></div>
+          <p>Loading your Google Docs...</p>
+        </div>
+        
+        <div id="docs-browser" class="drive-files-list">
+          <!-- Google Docs will be loaded here -->
+        </div>
+        
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary modal-cancel">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="notification" class="notification"></div>
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script src="https://accounts.google.com/gsi/client"></script>
+  <script src="google-drive.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

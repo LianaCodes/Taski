@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taski - Test Page</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(140deg, #f8fafc 0%, #f1f5f9 55%, #e2e8f0 100%);
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #1e293b;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.1rem;
+      color: #64748b;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      margin: 0 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+    }
+    .btn-secondary {
+      background: white;
+      color: #6366f1;
+      border: 2px solid #6366f1;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+    }
+    .status {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Taski Test Page</h1>
+    <p>This is a simple test to check if your frontend is working properly.</p>
+    
+    <div class="status">
+      <h3>✅ If you can see this page, your frontend is working!</h3>
+      <p>The styling is loading correctly and the HTML structure is intact.</p>
+    </div>
+    
+    <div>
+      <a href="index.html" class="btn btn-primary">Go to Landing Page</a>
+      <a href="login.html" class="btn btn-secondary">Go to Login</a>
+    </div>
+    
+    <div class="status">
+      <h4>Quick Troubleshooting:</h4>
+      <p><strong>If the main pages aren't working:</strong></p>
+      <ul style="text-align: left; max-width: 400px; margin: 0 auto;">
+        <li>Check if the backend server is running on port 5000</li>
+        <li>Make sure MongoDB is connected</li>
+        <li>Check browser console for JavaScript errors</li>
+        <li>Verify all CSS and JS files are loading</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

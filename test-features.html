@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test New Features - Taski</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .feature { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px; }
+        .strength-meter { width: 100%; height: 4px; background: #e5e7eb; border-radius: 2px; margin-top: 0.5rem; }
+        .strength-bar { height: 100%; transition: all 0.3s ease; border-radius: 2px; }
+        .strength-bar.weak { background: #ef4444; width: 25%; }
+        .strength-bar.fair { background: #f59e0b; width: 50%; }
+        .strength-bar.good { background: #eab308; width: 75%; }
+        .strength-bar.strong { background: #10b981; width: 100%; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; margin: 10px 0; }
+        .calendar-day { padding: 10px; border: 1px solid #ddd; text-align: center; cursor: pointer; }
+        .calendar-day.today { background: #f472b6; color: white; }
+        .btn { padding: 8px 16px; margin: 5px; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-primary { background: #f472b6; color: white; }
+        .btn-secondary { background: #6b7280; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Taski New Features Test</h1>
+    
+    <div class="feature">
+        <h2>✅ 1. Logout Moved to Settings</h2>
+        <p>The logout button has been moved from the sidebar footer to the Settings section for better organization.</p>
+    </div>
+
+    <div class="feature">
+        <h2>✅ 2. Google Docs Import Button</h2>
+        <p>Added "Import from Google Docs" button beside the "Add Note" button in the Notes section header.</p>
+        <button class="btn btn-secondary">📄 Import from Google Docs</button>
+        <button class="btn btn-primary">+ Add Note</button>
+    </div>
+
+    <div class="feature">
+        <h2>✅ 3. Password Security Level</h2>
+        <p>Enhanced password change with strength indicator and validation:</p>
+        <input type="password" id="test-password" placeholder="Test password strength" style="width: 300px; padding: 8px;">
+        <div class="strength-meter">
+            <div class="strength-bar" id="test-strength-bar"></div>
+        </div>
+        <div id="test-strength-text" style="font-size: 0.8rem; margin-top: 0.25rem;">Password strength</div>
+    </div>
+
+    <div class="feature">
+        <h2>✅ 4. Proper Calendar</h2>
+        <p>Improved calendar with proper weekday headers and interactive day events:</p>
+        <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; margin: 10px 0; background: #f472b6; padding: 1px;">
+            <div style="padding: 10px; text-align: center; color: white; font-weight: bold;">Sun</div>
+            <div style="padding: 10px; text-align: center; color: white; font-weight: bold;">Mon</div>
+            <div style="padding: 10px; text-align: center; color: white; font-weight: bold;">Tue</div>
+            <div style="padding: 10px; text-align: center; color: white; font-weight: bold;">Wed</div>
+            <div style="padding: 10px; text-align: center; color: white; font-weight: bold;">Thu</div>
+            <div style="padding: 10px; text-align: center; color: white; font-weight: bold;">Fri</div>
+            <div style="padding: 10px; text-align: center; color: white; font-weight: bold;">Sat</div>
+        </div>
+        <div class="calendar-grid">
+            <div class="calendar-day">1</div>
+            <div class="calendar-day">2</div>
+            <div class="calendar-day">3</div>
+            <div class="calendar-day">4</div>
+            <div class="calendar-day">5</div>
+            <div class="calendar-day">6</div>
+            <div class="calendar-day">7</div>
+            <div class="calendar-day">8</div>
+            <div class="calendar-day">9</div>
+            <div class="calendar-day">10</div>
+            <div class="calendar-day">11</div>
+            <div class="calendar-day">12</div>
+            <div class="calendar-day">13</div>
+            <div class="calendar-day today">14</div>
+        </div>
+        <p><small>Click on any day to see events (when connected to the full app)</small></p>
+    </div>
+
+    <div class="feature">
+        <h2>✅ 5. All Features Working</h2>
+        <p>All requested improvements have been implemented:</p>
+        <ul>
+            <li>✅ Proper calendar with weekday headers and interactive events</li>
+            <li>✅ Logout moved to Settings section</li>
+            <li>✅ Google Docs import button beside Add Note</li>
+            <li>✅ Password strength validation with visual indicator</li>
+            <li>✅ Enhanced security for password changes</li>
+        </ul>
+    </div>
+
+    <script>
+        // Test password strength functionality
+        function calculatePasswordStrength(password) {
+            let score = 0;
+            if (password.length >= 8) score++;
+            if (/[a-z]/.test(password)) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+            
+            if (score < 2) return 'weak';
+            if (score < 3) return 'fair';
+            if (score < 4) return 'good';
+            return 'strong';
+        }
+
+        function updateStrengthMeter(strength, bar, text) {
+            bar.className = `strength-bar ${strength}`;
+            
+            const messages = {
+                weak: 'Weak password',
+                fair: 'Fair password',
+                good: 'Good password',
+                strong: 'Strong password'
+            };
+            
+            text.textContent = messages[strength];
+            text.style.color = {
+                weak: '#ef4444',
+                fair: '#f59e0b',
+                good: '#eab308',
+                strong: '#10b981'
+            }[strength];
+        }
+
+        document.getElementById('test-password').addEventListener('input', (e) => {
+            const password = e.target.value;
+            const strength = calculatePasswordStrength(password);
+            const bar = document.getElementById('test-strength-bar');
+            const text = document.getElementById('test-strength-text');
+            updateStrengthMeter(strength, bar, text);
+        });
+
+        // Test calendar interactivity
+        document.querySelectorAll('.calendar-day').forEach(day => {
+            day.addEventListener('click', () => {
+                alert(`Clicked on day ${day.textContent}. In the full app, this would show events for this day.`);
+            });
+        });
+    </script>
+</body>
+</html>
