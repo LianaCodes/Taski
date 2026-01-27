@@ -25,9 +25,13 @@ const sessionRoutes = require('./routes/sessions');
 const classroomRoutes = require('./routes/classroom');
 const userSettingsRoutes = require('./routes/userSettings');
 const aiTutorRoutes = require('./routes/aiTutor');
+const n8nRoutes = require('./routes/n8n');
 
 // ---- API MOUNTS ----
 app.use('/api/auth', authRoutes);
+
+// n8n routes (protected by API key, not user auth)
+app.use('/api/n8n', n8nRoutes);
 
 // Apply email verification middleware to protected routes
 app.use('/api/tasks', requireEmailVerification);
